@@ -1,7 +1,7 @@
 import React from 'react';
 import { Breadcrumb, Flex, IconButton, Input, InputGroup, Text, Group } from "@chakra-ui/react";
 import { MdPerson } from "react-icons/md";
-import { FiBell, FiSearch, FiSettings } from "react-icons/fi";
+import { FiBell, FiMenu, FiSearch, FiSettings } from "react-icons/fi";
 
 export const Navbar = () => {
     return (
@@ -12,13 +12,15 @@ export const Navbar = () => {
             backdropFilter="blur(15px)"
             borderRadius="xl"
             p="4"
+            flexDirection={{ base: 'column', md: 'row' }}
             justify="space-between"
-            align="center"
+            align={{ base: "flex-start", md: "center" }}
+            gap={{ base: 4, md: 0 }}
             shadow="sm"
             zIndex="10"
         >
             {/* 左側：麵包屑與標題 */}
-            <Flex direction="column">
+            <Flex direction="column" w={{ base: 'full', md: 'auto' }}>
                 <Breadcrumb.Root size="sm" color="gray.500">
                     <Breadcrumb.List>
                         <Breadcrumb.Item>
@@ -36,12 +38,12 @@ export const Navbar = () => {
             </Flex>
 
             {/* 右側：搜索與功能 */}
-            <Flex align="center" gap="4">
+            <Flex align="center" gap={2} w={{ base: 'full', md: 'auto' }} justifyContent={{ base: "space-between", md: "flex-end" }}>
                 {/* v3 使用 InputGroup snippet 處理圖示 */}
                 <InputGroup
-                    flex="1"
+                    flex={{ base: 1, md: 'none' }}
                     startElement={<FiSearch color="gray.400" />}
-                    width="200px"
+                    width={{ base: 'full', md: 'auto' }}
                 >
                     <Input
                         placeholder="Type here..."
@@ -62,6 +64,11 @@ export const Navbar = () => {
                     </IconButton>
                     <IconButton variant="ghost" aria-label="notifications" borderRadius="lg">
                         <FiBell />
+                    </IconButton>
+
+                    {/* 手機板才出現 */}
+                    <IconButton variant="ghost" aria-label="menu" borderRadius="lg" display={{ base: 'flex', lg: 'none' }}>
+                        <FiMenu />
                     </IconButton>
                 </Group>
             </Flex>
